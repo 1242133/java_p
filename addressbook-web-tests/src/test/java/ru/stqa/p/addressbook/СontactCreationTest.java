@@ -35,7 +35,7 @@ public class СontactCreationTest {
   public void testСontactCreation() throws Exception {
     gotoContactsPage();
     initContactsCreation();
-    fillContactsFrom(new GroupContact("Alexey", "Orlov", "89445556767", "a123@gmail.com"));
+    fillContactsFrom(new ContactData("Alexey", "Orlov", "89445556767", "a123@gmail.com"));
     submitContactsCreation();
     returnToContactsPage();
   }
@@ -48,7 +48,7 @@ public class СontactCreationTest {
     wd.findElement(By.linkText("home page")).click();
   }
 
-  private void fillContactsFrom(GroupContact groupContact) {
+  private void fillContactsFrom(ContactData groupContact) {
     wd.findElement(By.name("firstname")).sendKeys(groupContact.firstname());
     wd.findElement(By.name("lastname")).clear();
     wd.findElement(By.name("lastname")).sendKeys(groupContact.lastname());

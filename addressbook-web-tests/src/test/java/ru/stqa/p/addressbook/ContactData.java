@@ -2,13 +2,13 @@ package ru.stqa.p.addressbook;
 
 import java.util.Objects;
 
-public final class GroupContact {
+public final class ContactData {
   private final String firstname;
   private final String lastname;
   private final String mobile;
   private final String email;
 
-  public GroupContact(String firstname, String lastname, String mobile, String email) {
+  public ContactData(String firstname, String lastname, String mobile, String email) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.mobile = mobile;
@@ -35,7 +35,7 @@ public final class GroupContact {
   public boolean equals(Object obj) {
     if (obj == this) return true;
     if (obj == null || obj.getClass() != this.getClass()) return false;
-    var that = (GroupContact) obj;
+    var that = (ContactData) obj;
     return Objects.equals(this.firstname, that.firstname) &&
             Objects.equals(this.lastname, that.lastname) &&
             Objects.equals(this.mobile, that.mobile) &&
