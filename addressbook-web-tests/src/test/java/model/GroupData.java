@@ -1,4 +1,4 @@
-package ru.stqa.p.addressbook;
+package model;
 
 import java.util.Objects;
 
