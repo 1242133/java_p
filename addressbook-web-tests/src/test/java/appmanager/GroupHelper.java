@@ -73,4 +73,20 @@ public class GroupHelper extends HelperBase {
   public void initContactsCreation() {
     wd.findElement(By.name("firstname")).clear();
   }
+
+  public void selectHome() {
+    click(By.name("link"));
+  }
+  public void selectContact() {
+    click(By.name("id"));
+  }
+
+  public void selectDelete() {
+    click(By.xpath("//input[@value='Delete']"));
+  }
+
+  public void confirmAction() {
+    wd.switchTo().alert().accept();
+  }
+
 }

@@ -7,8 +7,6 @@ import org.testng.annotations.BeforeMethod;
 public class TestBase {
 
   protected final ApplicationManager app = new ApplicationManager();
-  protected final ApplicationManager App = new ApplicationManager();
-
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
     app.init();
