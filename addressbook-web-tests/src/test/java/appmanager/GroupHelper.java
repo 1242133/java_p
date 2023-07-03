@@ -1,5 +1,6 @@
 package appmanager;
 
+import homework.ContactData;
 import model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -42,5 +43,34 @@ public class GroupHelper extends HelperBase {
 
   public void submitGroupModification() {
     click(By.name("update"));
+  }
+
+  public void returnToContactsPage() {
+    click(By.linkText("Logout"));
+  }
+
+  public void click(By locator) {
+    wd.findElement(locator).click();
+  }
+
+  public void submitContactsCreation() {
+    click(By.linkText("home page"));
+  }
+
+  public void fillContactsFrom(ContactData contactData) {
+    type(By.name("firstname"), contactData.firstname());
+    type(By.name("lastname"), contactData.lastname());
+    type(By.name("mobile"), contactData.mobile());
+    type(By.name("email"), contactData.email());
+    click(By.xpath("//div[@id='content']/form/input[21]"));
+  }
+
+  public void type(By locator, String text) {
+    wd.findElement(locator).clear();
+    wd.findElement(locator).sendKeys(text);
+  }
+
+  public void initContactsCreation() {
+    wd.findElement(By.name("firstname")).clear();
   }
 }

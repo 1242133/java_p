@@ -8,9 +8,9 @@ import java.time.Duration;
 public class ApplicationManager {
   public WebDriver wd;
 
-  private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
+  private SessionHelper sessionHelper;
 
   public void init() {
     wd = new ChromeDriver();
@@ -33,4 +33,5 @@ public class ApplicationManager {
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
   }
+
 }
