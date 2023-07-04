@@ -73,9 +73,9 @@ public class GroupHelper extends HelperBase {
   public void initContactsCreation() {
     wd.findElement(By.name("firstname")).clear();
   }
-  
+
   public void selectContact() {
-    click(By.name("id"));
+    click(By.xpath("//input[@id]"));
   }
   public void selectDelete() {
     click(By.xpath("//input[@value='Delete']"));
@@ -85,4 +85,7 @@ public class GroupHelper extends HelperBase {
     wd.switchTo().alert().accept();
   }
 
+  public void selectContactModification() {
+    click(By.xpath("//table[@id='maintable']/tbody/tr[4]/td[8]/a/img"));
+  }
 }
