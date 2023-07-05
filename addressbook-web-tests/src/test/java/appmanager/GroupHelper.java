@@ -88,4 +88,19 @@ public class GroupHelper extends HelperBase {
   public void selectContactModification() {
     click(By.xpath("//table[@id='maintable']/tbody/tr[4]/td[8]/a/img"));
   }
+
+  public void fillContacts() {
+    wd.findElement(By.name("firstname")).clear();
+    wd.findElement(By.name("firstname")).sendKeys("Alexey");
+    wd.findElement(By.name("lastname")).click();
+    wd.findElement(By.name("lastname")).clear();
+    wd.findElement(By.name("lastname")).sendKeys("Orlov");
+    wd.findElement(By.name("mobile")).click();
+    wd.findElement(By.name("mobile")).clear();
+    wd.findElement(By.name("mobile")).sendKeys("89445556767");
+    wd.findElement(By.name("email")).click();
+    wd.findElement(By.name("email")).clear();
+    wd.findElement(By.name("email")).sendKeys("a123@gmail.com");
+    wd.findElement(By.xpath("//div[@id='content']/form/input[22]")).click();
+  }
 }
