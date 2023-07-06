@@ -1,6 +1,7 @@
 package appmanager;
 
 import homework.ContactData;
+import homework.ModContactData;
 import model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -66,8 +67,10 @@ public class GroupHelper extends HelperBase {
   }
 
   public void type(By locator, String text) {
-    wd.findElement(locator).clear();
-    wd.findElement(locator).sendKeys(text);
+    if (text != null) {
+      wd.findElement(locator).clear();
+      wd.findElement(locator).sendKeys(text);
+    }
   }
 
   public void initContactsCreation() {
@@ -77,6 +80,7 @@ public class GroupHelper extends HelperBase {
   public void selectContact() {
     click(By.xpath("//input[@id]"));
   }
+
   public void selectDelete() {
     click(By.xpath("//input[@value='Delete']"));
   }
@@ -89,18 +93,20 @@ public class GroupHelper extends HelperBase {
     click(By.xpath("//table[@id='maintable']/tbody/tr[4]/td[8]/a/img"));
   }
 
-  public void fillContacts() {
-    wd.findElement(By.name("firstname")).clear();
-    wd.findElement(By.name("firstname")).sendKeys("Alexey");
-    wd.findElement(By.name("lastname")).click();
-    wd.findElement(By.name("lastname")).clear();
-    wd.findElement(By.name("lastname")).sendKeys("Orlov");
-    wd.findElement(By.name("mobile")).click();
-    wd.findElement(By.name("mobile")).clear();
-    wd.findElement(By.name("mobile")).sendKeys("89445556767");
-    wd.findElement(By.name("email")).click();
-    wd.findElement(By.name("email")).clear();
-    wd.findElement(By.name("email")).sendKeys("a123@gmail.com");
+  public void fillContacts(ModContactData modContactData) {
+    typeContact(By.name("firstname"), modContactData.firstname());
+    typeContact(By.name("lastname"), modContactData.lastname());
+    typeContact(By.name("mobile"), modContactData.mobile());
+    typeContact(By.name("email"), modContactData.email());
     wd.findElement(By.xpath("//div[@id='content']/form/input[22]")).click();
   }
+
+  private void typeContact(By locat, String textContact) {
+    if (textContact != null) {
+      wd.findElement(locat).clear();
+      wd.findElement(locat).sendKeys(textContact);
+    }
+  }
 }
+
+
