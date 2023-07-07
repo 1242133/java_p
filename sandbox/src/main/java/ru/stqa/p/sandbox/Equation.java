@@ -5,10 +5,9 @@ public class Equation {
   private final double a;
   private final double b;
   private final double c;
-
   private int n;
 
-  public Equation(double a, double b, double c) {
+  public Equation(double a, double b, double c){
     this.a = a;
     this.b = b;
     this.c = c;
@@ -30,13 +29,12 @@ public class Equation {
     } else if (c != 0) {
       n = 0;
 
-    } else {
+    } else  {
       n = -1;
     }
 
   }
-
-  public int rootNumder() {
+  public int rootNumber() {
     return n;
   }
 }

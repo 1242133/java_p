@@ -1,7 +1,6 @@
-package homework;
+package tests;
 
 import org.testng.annotations.Test;
-import tests.TestBase;
 
 public class СontactDeletionTest extends TestBase {
 
