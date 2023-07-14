@@ -4,8 +4,6 @@ import model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +31,6 @@ public class ContactHelper extends HelperBase {
     type(By.name("mobile"), contactData.mobile());
     type(By.name("email"), contactData.email());
 
-    if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
   }
   public void type(By locator, String text) {
     wd.findElement(locator).clear();

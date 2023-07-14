@@ -34,28 +34,26 @@ public final class ContactData {
   }
 
   @Override
-  public boolean equals(Object obj) {
-    if (obj == this) return true;
-    if (obj == null || obj.getClass() != this.getClass()) return false;
-    var that = (ContactData) obj;
-    return Objects.equals(this.firstname, that.firstname) &&
-            Objects.equals(this.lastname, that.lastname) &&
-            Objects.equals(this.mobile, that.mobile) &&
-            Objects.equals(this.email, that.email);
+  public String toString() {
+    return "ContactData{" +
+            "firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", mobile='" + mobile + '\'' +
+            ", email='" + email + '\'' +
+            '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(mobile, that.mobile) && Objects.equals(email, that.email) && Objects.equals(group, that.group);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstname, lastname, mobile, email);
-  }
-
-  @Override
-  public String toString() {
-    return "GroupContact[" +
-            "firstname=" + firstname + ", " +
-            "lastname=" + lastname + ", " +
-            "mobile=" + mobile + ", " +
-            "email=" + email + ']';
+    return Objects.hash(firstname, lastname, mobile, email, group);
   }
 
   public String getGroup() {
