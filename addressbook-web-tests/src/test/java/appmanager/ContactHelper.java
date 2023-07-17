@@ -25,7 +25,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void fillContactsFrom(ContactData contactData, boolean creation) {
+  public void fillContactsFrom(ContactData contactData) {
     type(By.name("firstname"), contactData.firstname());
     type(By.name("lastname"), contactData.lastname());
     type(By.name("mobile"), contactData.mobile());
@@ -63,7 +63,7 @@ public class ContactHelper extends HelperBase {
 
   public void createContact(ContactData contact, boolean creation) {
     initContactsCreation();
-    fillContactsFrom(contact, true);
+    fillContactsFrom(contact);
     submitContactsCreation();
     returnToContactsPage();
   }
@@ -80,8 +80,8 @@ public class ContactHelper extends HelperBase {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
-      String name = element.getText();
-      ContactData contact = new ContactData(name, null, null, null, null);
+      String id = element.findElement(By.tagName("input")).getAttribute("value");
+      ContactData contact = new ContactData(id,"Alexey", "Orlov", "800", "a123@gmail.com", null);
       contacts.add(contact);
 
     }
