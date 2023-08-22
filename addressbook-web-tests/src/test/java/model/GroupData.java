@@ -54,7 +54,7 @@ public final class GroupData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     GroupData groupData = (GroupData) o;
-    return Objects.equals(name, groupData.name);
+    return name != null ? name.equals(groupData.name) : groupData.name == null;
   }
 
   @Override

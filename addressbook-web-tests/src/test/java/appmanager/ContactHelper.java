@@ -4,6 +4,8 @@ import model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +27,16 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
-  public void fillContactsFrom(ContactData contactData) {
-    type(By.name("firstname"), contactData.firstname());
-    type(By.name("lastname"), contactData.lastname());
-    type(By.name("mobile"), contactData.mobile());
-    type(By.name("email"), contactData.email());
-
+  public void fillContactsFrom(ContactData contactData,boolean creation) {
+    type(By.name("firstname"), contactData.getName());
+    type(By.name("lastname"), contactData.getLastname());
+    type(By.name("mobile"), contactData.getMobile());
+    type(By.name("email"), contactData.getEmail());
+    if (creation) {
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+    } else  {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
   }
   public void type(By locator, String text) {
     wd.findElement(locator).clear();
@@ -61,9 +67,9 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[22]"));
   }
 
-  public void createContact(ContactData contact, boolean creation) {
+  public void createContact(ContactData contact) {
     initContactsCreation();
-    fillContactsFrom(contact);
+    fillContactsFrom(new ContactData("Alexey", "Orlov", "800", "a123@gmail.com", "[none]"), true);
     submitContactsCreation();
     returnToContactsPage();
   }
@@ -81,7 +87,7 @@ public class ContactHelper extends HelperBase {
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      ContactData contact = new ContactData(id,"Alexey", "Orlov", "800", "a123@gmail.com", null);
+      ContactData contact = new ContactData(id, "Alexey", "Orlov", "800", "a123@gmail.com", null);
       contacts.add(contact);
 
     }
