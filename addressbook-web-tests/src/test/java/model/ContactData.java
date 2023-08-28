@@ -26,9 +26,7 @@ public final class ContactData {
     this.email = email;
     this.group = group;
   }
-
-  public ContactData(int id, String firstname, String lastname) {
-  }
+  
 
   public String getName() {
     return firstname;
