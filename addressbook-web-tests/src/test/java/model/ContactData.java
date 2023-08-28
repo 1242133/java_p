@@ -6,9 +6,9 @@ public final class ContactData {
   private int id;
   private final String firstname;
   private final String lastname;
-  private final String mobile;
-  private final String email;
-  private final String group;
+  private  String mobile;
+  private  String email;
+  private  String group;
 
   public ContactData(String firstname, String lastname, String mobile, String email, String group) {
     this.id = Integer.MAX_VALUE;
@@ -18,15 +18,13 @@ public final class ContactData {
     this.email = email;
     this.group = group;
   }
-  public ContactData(int id, String firstname, String lastname, String mobile, String email, String group) {
+  public ContactData(int id, String firstname, String lastname) {
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
-    this.mobile = mobile;
-    this.email = email;
-    this.group = group;
   }
-  
+
+
 
   public String getName() {
     return firstname;
