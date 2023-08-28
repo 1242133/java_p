@@ -27,6 +27,9 @@ public final class ContactData {
     this.group = group;
   }
 
+  public ContactData(int id, String firstname, String lastname) {
+  }
+
   public String getName() {
     return firstname;
   }
