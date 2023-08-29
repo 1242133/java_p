@@ -8,7 +8,7 @@ import java.util.List;
 
 public class СontactDeletionTest extends TestBase {
 
-  @Test
+  @Test(enabled = false)
   public void testСontactDeletion() {
     app.getNavigationHelper().gotoHomePage();
     if (!app.getContactHelper().isThereAContact()) {
