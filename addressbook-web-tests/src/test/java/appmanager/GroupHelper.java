@@ -21,6 +21,7 @@ public class GroupHelper extends HelperBase {
   public void submitGroupCreation() {
     click(By.name("submit"));
   }
+
   public void fillGroupFrom(GroupData groupData) {
     type(By.name("group_name"), groupData.name());
     type(By.name("group_header"), groupData.header());
@@ -53,8 +54,10 @@ public class GroupHelper extends HelperBase {
   }
 
   public void type(By locator, String text) {
-    wd.findElement(locator).clear();
-    wd.findElement(locator).sendKeys(text);
+    if (text != null) {
+      wd.findElement(locator).clear();
+      wd.findElement(locator).sendKeys(text);
+    }
   }
 
 
@@ -62,6 +65,14 @@ public class GroupHelper extends HelperBase {
     initGroupCreation();
     fillGroupFrom(group);
     submitGroupCreation();
+    returnToGroupPage();
+  }
+
+  public void modifyGroup(int index, GroupData group) {
+    selectGroup(index);
+    initGroupModification();
+    fillGroupFrom(group);
+    submitGroupModification();
     returnToGroupPage();
   }
 
