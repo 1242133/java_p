@@ -1,6 +1,7 @@
 package appmanager;
 
 import model.ContactData;
+import model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,8 +44,8 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
-  public void selectContact(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
   public void selectDelete() {
@@ -55,8 +56,8 @@ public class ContactHelper extends HelperBase {
     wd.switchTo().alert().accept();
   }
 
-  public void initContactModification(int index) {
-    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+  public void initContactModification() {
+    click(By.xpath("//img[@alt='Edit']"));
   }
 
   public void submitContactsModification() {
@@ -70,15 +71,16 @@ public class ContactHelper extends HelperBase {
     returnToContactsPage();
   }
 
-  public void modify(int index, ContactData contact) {
-    initContactModification(index);
+  public void modify(ContactData contact) {
+    selectContactById(contact.getId());
+    initContactModification();
     fillContactsFrom(contact, false);
     submitContactsModification();
     returnToContactsPage();
   }
 
-  public void delete(int index) {
-    selectContact(index);
+  public void delete(ContactData contact) {
+    selectContactById(contact.getId());
     selectDelete();
     confirmAction();
   }
@@ -93,6 +95,20 @@ public class ContactHelper extends HelperBase {
 
   public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> elements = wd.findElements(By.name("entry"));
+    for (WebElement element : elements) {
+      List<WebElement> contactDataElements = element.findElements(By.cssSelector("td"));
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      String lastname = contactDataElements.get(1).getText();
+      String firstname = contactDataElements.get(2).getText();
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+
+    }
+    return contacts;
+  }
+
+  public Contacts all() {
+    Contacts contacts = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       List<WebElement> contactDataElements = element.findElements(By.cssSelector("td"));
