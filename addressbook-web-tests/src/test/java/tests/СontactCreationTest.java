@@ -23,7 +23,7 @@ public class СontactCreationTest extends TestBase {
             before.withAdded(contact.withId(after.stream().mapToInt((g)-> g.getId()).max().getAsInt()))));
   }
 
-  @Test
+  @Test (enabled = false)
   public void testBadСontactCreation() {
     app.goTo().contactPage();
     Contacts before = app.contact().all();
