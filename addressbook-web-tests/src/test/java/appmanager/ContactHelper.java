@@ -109,7 +109,9 @@ public class ContactHelper extends HelperBase {
       String lastname = contactDataElements.get(1).getText();
       String firstname = contactDataElements.get(2).getText();
       String allPhones = contactDataElements.get(5).getText();
-      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+      String allEmails = contactDataElements.get(4).getText();
+      String address = contactDataElements.get(3).getText();
+      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withAddress(address).withAllEmails(allEmails)
               .withAllPhones(allPhones));
     }
     return new Contacts(contactCache);
@@ -122,9 +124,12 @@ public class ContactHelper extends HelperBase {
     String home = wd.findElement(By.name("home")).getAttribute("value");
     String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String work = wd.findElement(By.name("work")).getAttribute("value");
+    String email = wd.findElement(By.name("email")).getAttribute("value");
+    String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+    String email3 = wd.findElement(By.name("email3")).getAttribute("value");
     wd.navigate().back();
     return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
-            .withHomePhone(home).withMobile(mobile).withWorkPhone(work);
+            .withHomePhone(home).withMobile(mobile).withWorkPhone(work).withEmail(email).withEmail2(email2).withEmail3(email3);
   }
   public void initContactModificationById(int id) {
     wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
