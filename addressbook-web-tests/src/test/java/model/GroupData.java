@@ -8,8 +8,15 @@ public final class GroupData {
   private String header;
   private String footer;
 
-  public String name() {
+  public String getName() {
     return name;
+  }
+  public String getHeader() {
+    return header;
+  }
+
+  public String getFooter() {
+    return footer;
   }
 
   public int getId() {
@@ -34,14 +41,6 @@ public final class GroupData {
   public GroupData withFooter(String footer) {
     this.footer = footer;
     return this;
-  }
-
-  public String header() {
-    return header;
-  }
-
-  public String footer() {
-    return footer;
   }
 
   @Override
