@@ -17,6 +17,8 @@ public class ContactPhoneTests extends TestBase {
     ContactData contact = app.contact().all().stream().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().InfoFromEditForm(contact);
     assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+    assertThat(contact.getAddress(), equalTo(cleanedAddress(contactInfoFromEditForm.getAddress())));
+    assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
   }
 
   private String mergePhones(ContactData contact) {
@@ -25,30 +27,6 @@ public class ContactPhoneTests extends TestBase {
             .map(ContactPhoneTests::cleaned)
             .collect(Collectors.joining("\n"));
   }
-  public static String cleaned(String phone) {
-    return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
-  }
-
-  @Test
-  public void testContactAddress() {
-    app.goTo().contactPage();
-    ContactData contact = app.contact().all().stream().iterator().next();
-    ContactData contactInfoFromEditForm = app.contact().InfoFromEditForm(contact);
-    assertThat(contact.getAddress(), equalTo(cleanedAddress(contactInfoFromEditForm.getAddress())));
-  }
-
-  public static String cleanedAddress(String address) {
-    return address.replaceAll("\\s", "");
-  }
-
-  @Test
-  public void testContactEmails() {
-    app.goTo().contactPage();
-    ContactData contact = app.contact().all().stream().iterator().next();
-    ContactData contactInfoFromEditForm = app.contact().InfoFromEditForm(contact);
-    assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
-  }
-
   private String mergeEmails(ContactData contact) {
     return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
             .stream().filter((s) -> !s.equals(""))
@@ -58,6 +36,14 @@ public class ContactPhoneTests extends TestBase {
 
   public static String cleanedEmails(String email) {
     return email.replaceAll("\\s", "");
+  }
+
+  public static String cleaned(String phone) {
+    return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+  }
+
+  public static String cleanedAddress(String address) {
+    return address.replaceAll("\\s", "");
   }
 }
 

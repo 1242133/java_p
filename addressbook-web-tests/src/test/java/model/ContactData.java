@@ -144,7 +144,6 @@ public final class ContactData {
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
             ", mobile='" + mobile + '\'' +
-            ", email='" + email + '\'' +
             ", group='" + group + '\'' +
             ", homePhone='" + homePhone + '\'' +
             ", workPhone='" + workPhone + '\'' +
@@ -155,11 +154,17 @@ public final class ContactData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
-    return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(mobile, that.mobile) && Objects.equals(email, that.email) && Objects.equals(group, that.group) && Objects.equals(homePhone, that.homePhone) && Objects.equals(workPhone, that.workPhone);
+    return id == that.id
+            && Objects.equals(firstname, that.firstname)
+            && Objects.equals(lastname, that.lastname)
+            && Objects.equals(mobile, that.mobile)
+            && Objects.equals(group, that.group)
+            && Objects.equals(homePhone, that.homePhone)
+            && Objects.equals(workPhone, that.workPhone);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, lastname, mobile, email, group, homePhone, workPhone);
+    return Objects.hash(id, firstname, lastname, mobile, group, homePhone, workPhone);
   }
 }
