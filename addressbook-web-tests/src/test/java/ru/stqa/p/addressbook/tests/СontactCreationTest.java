@@ -2,10 +2,10 @@ package ru.stqa.p.addressbook.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import ru.stqa.p.addressbook.model.ContactData;
-import ru.stqa.p.addressbook.model.Contacts;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import ru.stqa.p.addressbook.model.ContactData;
+import ru.stqa.p.addressbook.model.Contacts;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,7 +18,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class СontactCreationTest extends TestBase {
-
   @DataProvider
   public Iterator<Object[]> validContactsFromJson() throws IOException {
     try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.json"))) {

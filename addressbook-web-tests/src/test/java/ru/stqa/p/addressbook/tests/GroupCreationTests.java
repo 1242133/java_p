@@ -3,10 +3,10 @@ package ru.stqa.p.addressbook.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
-import ru.stqa.p.addressbook.model.GroupData;
-import ru.stqa.p.addressbook.model.Groups;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import ru.stqa.p.addressbook.model.GroupData;
+import ru.stqa.p.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
