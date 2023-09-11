@@ -30,14 +30,8 @@ public class ContactPhoneTests extends TestBase {
   private String mergeEmails(ContactData contact) {
     return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
             .stream().filter((s) -> !s.equals(""))
-            .map(ContactPhoneTests::cleaned)
             .collect(Collectors.joining("\n"));
   }
-
-  public static String cleanedEmails(String email) {
-    return email.replaceAll("\\s", "");
-  }
-
   public static String cleaned(String phone) {
     return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
   }

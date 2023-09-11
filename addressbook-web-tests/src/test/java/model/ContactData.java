@@ -1,13 +1,18 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.File;
 import java.util.Objects;
 
 public final class ContactData {
   private int id = Integer.MAX_VALUE;
+  @Expose transient
   private String firstname;
+  @Expose transient
   private String lastname;
   private String mobile;
+  @Expose transient
   private String email;
   private String group;
   private String homePhone;
