@@ -47,7 +47,7 @@ public class ApplicationManager {
     sessionHelper = new SessionHelper(wd);
     contactHelper = new ContactHelper(wd);
     sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
-    dbHelper = new DbHelper(properties.getProperty("config"));
+    dbHelper = new DbHelper();
   }
 
   public void stop() {

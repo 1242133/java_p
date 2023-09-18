@@ -16,10 +16,10 @@ public class DbHelper {
 
   private final SessionFactory sessionFactory;
 
-  public DbHelper(String config) {
+  public DbHelper() {
 
     final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-            .configure(config)
+            .configure()
             .build();
     sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
   }

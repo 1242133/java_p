@@ -10,9 +10,7 @@ import ru.stqa.p.addressbook.model.Groups;
 
 import java.util.stream.Collectors;
 
-import static ru.stqa.p.addressbook.tests.TestBase.app;
-
-public class RemovingAndAddingGroupsForContacts {
+public class RemovingAndAddingGroupsForContacts extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {

@@ -60,7 +60,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void selectContactById(int id) {
-    click(By.cssSelector(String.format("input[name='selected[]'][value='%s']", id)));
+    click(By.cssSelector(String.format("input[value='%s']", id)));
   }
 
   public void selectGroupForAddById(int groupId) {
