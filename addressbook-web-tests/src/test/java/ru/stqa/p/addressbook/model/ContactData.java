@@ -4,7 +4,9 @@ import com.google.gson.annotations.Expose;
 import jakarta.persistence.*;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -23,8 +25,6 @@ public final class ContactData {
   @Expose
   @Column(name = "email")
   private String email;
-  @Transient
-  private String group;
   @Column(name = "home")
   private String homePhone;
   @Column(name = "work")
@@ -41,6 +41,11 @@ public final class ContactData {
   private String allEmails;
   transient
   private File photo;
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+           joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
+
 
   public File getPhoto() {
     return photo;
@@ -99,6 +104,10 @@ public final class ContactData {
     return id;
   }
 
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+
   public ContactData withId(int id) {
     this.id = id;
     return this;
@@ -119,13 +128,8 @@ public final class ContactData {
     return this;
   }
 
-  public ContactData withEmail(String email) {
+  public ContactData  withEmail(String email) {
     this.email = email;
-    return this;
-  }
-
-  public ContactData withGroup(String group) {
-    this.group = group;
     return this;
   }
 
@@ -159,6 +163,10 @@ public final class ContactData {
     this.address = address;
     return this;
   }
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+  }
 
   @Override
   public String toString() {
@@ -175,7 +183,10 @@ public final class ContactData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
-    return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(email, that.email);
+    return id == that.id
+            && Objects.equals(firstname, that.firstname)
+            && Objects.equals(lastname, that.lastname)
+            && Objects.equals(email, that.email);
   }
 
   @Override

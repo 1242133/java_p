@@ -2,10 +2,13 @@ package ru.stqa.p.addressbook.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.p.addressbook.model.ContactData;
 import ru.stqa.p.addressbook.model.Contacts;
+import ru.stqa.p.addressbook.model.GroupData;
+import ru.stqa.p.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -32,24 +35,33 @@ public class СontactCreationTest extends TestBase {
       return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
   }
+  @BeforeMethod
+  public void ensurePreconditions() {
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("group").withHeader("header").withFooter("footer"));
+    }
+  }
 
   @Test(dataProvider = "validContactsFromJson")
   public void testСontactCreation(ContactData contact) {
+    Groups groups = app.db().groups();
     app.goTo().contactPage();
     Contacts before = app.db().contacts();
     //File photo = new File("src/test/resources/stru.png");
-    app.contact().  create(contact);
+    app.contact().create(contact.inGroup(groups.iterator().next()));
     Contacts after = app.db().contacts();
     assertThat(after.size(), equalTo(before.size() + 1));
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g)-> g.getId()).max().getAsInt()))));
+    verifyContactListInUI();
   }
 
   @Test (enabled = false)
   public void testBadСontactCreation() {
     app.goTo().contactPage();
     Contacts before = app.contact().all();
-    ContactData contact = new ContactData().withFirstname("Alexe'").withLastname("Orlov").withMobile(null).withEmail(null).withGroup(null);
+    ContactData contact = new ContactData().withFirstname("Alexe'").withLastname("Orlov").withMobile(null).withEmail(null);
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.contact().all();

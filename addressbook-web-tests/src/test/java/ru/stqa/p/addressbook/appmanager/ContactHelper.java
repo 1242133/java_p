@@ -1,10 +1,12 @@
 package ru.stqa.p.addressbook.appmanager;
 
-import ru.stqa.p.addressbook.model.ContactData;
-import ru.stqa.p.addressbook.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import ru.stqa.p.addressbook.model.ContactData;
+import ru.stqa.p.addressbook.model.Contacts;
 
 import java.util.List;
 
@@ -32,6 +34,17 @@ public class ContactHelper extends HelperBase {
     type(By.name("mobile"), contactData.getMobile());
     type(By.name("email"), contactData.getEmail());
     attach(By.name("photo"), contactData.getPhoto());
+
+
+    if (creation) {
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertEquals(contactData.getGroups().size(), 1);
+        new Select(wd.findElement(By.name("new_group")))
+                .selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      }
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
   }
 
   public void type(By locator, String text) {
@@ -46,7 +59,23 @@ public class ContactHelper extends HelperBase {
   }
 
   public void selectContactById(int id) {
-    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    click(By.cssSelector(String.format("input[name='selected[]'][value='%s']", id)));
+  }
+
+  public void selectGroupForAddById(int groupId) {
+    click(By.cssSelector(String.format("select[name='to_group'] > option[value='%s']", groupId)));
+  }
+
+  public void selectGroupPageById(int groupId) {
+    click(By.cssSelector(String.format("select[name='group'] > option[value='%s']", groupId)));
+  }
+
+  private void removeSelectedContactFromGroup() {
+    click(By.xpath("//input[@name='remove']"));
+  }
+
+  public void addSelectedContactToGroup() {
+    click(By.xpath("//input[@value='Add to']"));
   }
 
   public void selectDelete() {
@@ -135,5 +164,17 @@ public class ContactHelper extends HelperBase {
   }
   public void initContactModificationById(int id) {
     wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+  }
+
+  public void addToGroup(int contactId, int groupId) {
+    selectContactById(contactId);
+    selectGroupForAddById(groupId);
+    addSelectedContactToGroup();
+    contactCache = null;
+  }
+  public void removeFromGroup(int contactId, int groupId) {
+    selectGroupPageById(groupId);
+    selectContactById(contactId);
+    removeSelectedContactFromGroup();
   }
 }
