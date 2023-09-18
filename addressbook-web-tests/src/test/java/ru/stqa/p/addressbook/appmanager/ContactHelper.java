@@ -12,6 +12,7 @@ import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
+
   public ContactHelper(WebDriver wd) {
     super(wd);
   }
