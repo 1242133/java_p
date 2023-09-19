@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class СontactDeletionTest extends TestBase {
+public class ContactDeletionTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -18,7 +18,7 @@ public class СontactDeletionTest extends TestBase {
     }
   }
   @Test
-  public void testСontactDeletion() {
+  public void testContactDeletion() {
     Contacts before = app.db().contacts();
     ContactData deletedContact = before.iterator().next();
     app.contact().delete(deletedContact);

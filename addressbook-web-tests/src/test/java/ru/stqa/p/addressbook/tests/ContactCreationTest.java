@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class СontactCreationTest extends TestBase {
+public class ContactCreationTest extends TestBase {
   @DataProvider
   public Iterator<Object[]> validContactsFromJson() throws IOException {
     try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.json"))) {
@@ -44,7 +44,7 @@ public class СontactCreationTest extends TestBase {
   }
 
   @Test(dataProvider = "validContactsFromJson")
-  public void testСontactCreation(ContactData contact) {
+  public void testContactCreation(ContactData contact) {
     Groups groups = app.db().groups();
     app.goTo().contactPage();
     Contacts before = app.db().contacts();
@@ -58,7 +58,7 @@ public class СontactCreationTest extends TestBase {
   }
 
   @Test (enabled = false)
-  public void testBadСontactCreation() {
+  public void testBadContactCreation() {
     app.goTo().contactPage();
     Contacts before = app.contact().all();
     ContactData contact = new ContactData().withFirstname("Alexe'").withLastname("Orlov").withMobile(null).withEmail(null);
