@@ -40,7 +40,9 @@ public class RemovingAndAddingGroupsForContacts extends TestBase {
 
     app.goTo().contactPage();
     app.contact().addToGroup(contactId, groupId);
-    
+    Contacts after = app.db().contacts();
+    Assert.assertFalse(groupHasContact(groupId, MovedContact(contactId, after)));
+
   }
 
   @Test
@@ -72,4 +74,5 @@ public class RemovingAndAddingGroupsForContacts extends TestBase {
             .map((g) -> new GroupData().withId(g.getId())).collect(Collectors.toSet())
             .contains(new GroupData().withId(groupId));
   }
+
 }
