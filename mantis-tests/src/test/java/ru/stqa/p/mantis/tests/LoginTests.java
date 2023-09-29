@@ -6,9 +6,10 @@ import ru.stqa.p.mantis.appmanager.HttpSession;
 import java.io.IOException;
 
 import static org.testng.AssertJUnit.assertTrue;
-import static ru.stqa.p.mantis.tests.TestBase.app;
 
-public class LoginTests {
+
+
+public class LoginTests extends TestBase {
 
   @Test
   public void testLogin() throws IOException {
